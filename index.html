@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Jake Denaturat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #141414;
+      --card2: #1a1a1a;
+      --accent: #e8c84a;
+      --accent2: #ff6b2b;
+      --text: #f0f0f0;
+      --muted: #666;
+      --border: #2a2a2a;
+      --green: #4caf50;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      max-width: 430px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1200 100%);
+      padding: 20px 16px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(232,200,74,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .logo-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+    .logo-text span { color: var(--accent); }
+    .logo-sub {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .badge-online {
+      background: rgba(76,175,80,0.15);
+      border: 1px solid rgba(76,175,80,0.4);
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+    .badge-online::before {
+      content: '● ';
+      font-size: 8px;
+    }
+
+    /* HERO BANNER */
+    .hero {
+      background: linear-gradient(135deg, rgba(232,200,74,0.1), rgba(255,107,43,0.05));
+      border: 1px solid rgba(232,200,74,0.2);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '🍶';
+      position: absolute;
+      right: 12px; bottom: -4px;
+      font-size: 60px;
+      opacity: 0.15;
+    }
+    .hero-tag {
+      background: var(--accent);
+      color: #000;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      line-height: 1.1;
+      letter-spacing: 1px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 12px;
+      color: #aaa;
+      margin: 6px 0 12px;
+      line-height: 1.5;
+    }
+    .hero-btn {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: transform 0.1s, opacity 0.1s;
+    }
+    .hero-btn:active { transform: scale(0.96); opacity: 0.9; }
+
+    /* NAV TABS */
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 0 16px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 1px;
+      padding: 0 16px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* PRODUCT GRID */
+    .products {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 16px;
+      margin-bottom: 24px;
+    }
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+      position: relative;
+    }
+    .product-card:active { transform: scale(0.97); }
+    .product-card.featured {
+      grid-column: span 2;
+      display: flex;
+      align-items: center;
+    }
+    .product-card.featured .product-img { width: 100px; height: 100px; flex-shrink: 0; }
+    .product-card.featured .product-info { flex: 1; }
+
+    .product-img {
+      width: 100%;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      position: relative;
+    }
+    .product-img.yellow { background: linear-gradient(135deg, #1a1400, #2a2000); }
+    .product-img.orange { background: linear-gradient(135deg, #1a0a00, #2a1200); }
+    .product-img.blue   { background: linear-gradient(135deg, #00091a, #001025); }
+    .product-img.red    { background: linear-gradient(135deg, #1a0005, #25000a); }
+
+    .badge-new, .badge-hot, .badge-sale {
+      position: absolute;
+      top: 8px; left: 8px;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+    .badge-new  { background: var(--green);  color: #000; }
+    .badge-hot  { background: var(--accent2); color: #fff; }
+    .badge-sale { background: var(--accent);  color: #000; }
+
+    .product-info { padding: 10px 12px 12px; }
+    .product-name {
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+    .product-desc {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+    .price-old {
+      font-size: 10px;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+    .buy-btn {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      transition: transform 0.1s;
+    }
+    .buy-btn:active { transform: scale(0.9); }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: flex;
+      gap: 0;
+      margin: 0 16px 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .stat {
+      flex: 1;
+      padding: 12px 8px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label {
+      font-size: 9px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ABOUT */
+    .about-card {
+      margin: 0 16px 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .about-card p {
+      font-size: 12px;
+      color: #aaa;
+      line-height: 1.7;
+    }
+    .about-card strong { color: var(--accent); }
+
+    /* FOOTER */
+    .footer {
+      background: #0d0d0d;
+      border-top: 1px solid var(--border);
+      padding: 16px;
+      text-align: center;
+    }
+    .footer p { font-size: 10px; color: var(--muted); line-height: 1.6; }
+    .footer span { color: var(--accent); }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 80px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--green);
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+      z-index: 999;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 100%; max-width: 430px;
+      background: rgba(10,10,10,0.95);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      display: flex;
+      padding: 8px 0 20px;
+    }
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+    .nav-item .nav-icon { font-size: 20px; }
+    .nav-item .nav-label { font-size: 9px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; }
+    .nav-item.active .nav-label { color: var(--accent); }
+
+    body { padding-bottom: 80px; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-icon">🍶</div>
+      <div>
+        <div class="logo-text"><span>Jake</span> Denaturat</div>
+        <div class="logo-sub">JakeDenaturat.com</div>
+      </div>
+    </div>
+    <div class="badge-online">ONLINE</div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-tag">🔥 Najlepsza jakość</div>
+    <h1>KUP DENATURAT<br>OD <span>JAKE'A</span></h1>
+    <p>Sprawdzony towar, szybka dostawa.<br>Zaufało nam już 500+ klientów.</p>
+    <button class="hero-btn" onclick="showToast('Zapraszamy do zakupów! 🍶')">Przeglądaj ofertę ↓</button>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-val">500+</span>
+    <span class="stat-label">Klientów</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val">99%</span>
+    <span class="stat-label">Jakość</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val">24/7</span>
+    <span class="stat-label">Dostępny</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val">4.9⭐</span>
+    <span class="stat-label">Ocena</span>
+  </div>
+</div>
+
+<div class="nav-tabs">
+  <div class="tab active">Wszystko</div>
+  <div class="tab">Premium</div>
+  <div class="tab">Tani</div>
+  <div class="tab">Zestawy</div>
+  <div class="tab">Nowe</div>
+</div>
+
+<div class="section-title">🛒 Nasza oferta</div>
+
+<div class="products">
+
+  <!-- FEATURED -->
+  <div class="product-card featured" onclick="addToCart('Denaturat Premium')">
+    <div class="product-img yellow">
+      🍶
+      <div class="badge-hot">HOT</div>
+    </div>
+    <div class="product-info">
+      <div class="product-name">Denaturat Premium</div>
+      <div class="product-desc">Najwyższa klasa. Czysty, mocny, sprawdzony przez Jake'a osobiście.</div>
+      <div class="product-footer">
+        <div>
+          <div class="price">$450</div>
+          <div class="price-old">$600</div>
+        </div>
+        <button class="buy-btn">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 1 -->
+  <div class="product-card" onclick="addToCart('Denaturat Classic')">
+    <div class="product-img orange">
+      🧴
+      <div class="badge-sale">-20%</div>
+    </div>
+    <div class="product-info">
+      <div class="product-name">Denaturat Classic</div>
+      <div class="product-desc">Sprawdzony od lat. Dobra cena.</div>
+      <div class="product-footer">
+        <div>
+          <div class="price">$200</div>
+          <div class="price-old">$250</div>
+        </div>
+        <button class="buy-btn">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="product-card" onclick="addToCart('Denaturat Blue Ice')">
+    <div class="product-img blue">
+      💧
+      <div class="badge-new">NEW</div>
+    </div>
+    <div class="product-info">
+      <div class="product-name">Blue Ice</div>
+      <div class="product-desc">Nowa edycja. Limitowana seria.</div>
+      <div class="product-footer">
+        <div>
+          <div class="price">$550</div>
+        </div>
+        <button class="buy-btn">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="product-card" onclick="addToCart('Denaturat Extra')">
+    <div class="product-img yellow">
+      ⚗️
+    </div>
+    <div class="product-info">
+      <div class="product-name">Extra Strong</div>
+      <div class="product-desc">Dla prawdziwych znawców.</div>
+      <div class="product-footer">
+        <div>
+          <div class="price">$350</div>
+        </div>
+        <button class="buy-btn">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 4 -->
+  <div class="product-card" onclick="addToCart('Zestaw Startowy')">
+    <div class="product-img red">
+      🎁
+      <div class="badge-sale">ZESTAW</div>
+    </div>
+    <div class="product-info">
+      <div class="product-name">Zestaw Startowy</div>
+      <div class="product-desc">3x Classic + 1x Premium. Idealne na start.</div>
+      <div class="product-footer">
+        <div>
+          <div class="price">$700</div>
+          <div class="price-old">$1050</div>
+        </div>
+        <button class="buy-btn">+</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-title">ℹ️ O nas</div>
+<div class="about-card">
+  <p>
+    Witaj w <strong>Jake Denaturat</strong> — jedynym miejscu, gdzie znajdziesz denaturat najwyższej jakości w mieście. Działamy legalnie, szybko i dyskretnie. <strong>Jake</strong> osobiście sprawdza każdą partię towaru zanim trafi do sprzedaży.<br><br>
+    Kontakt przez wiadomość lub spotkanie w umówionym miejscu. Nie zwlekaj — towar rozchodzi się błyskawicznie! 🍶
+  </p>
+</div>
+
+<div class="footer">
+  <p>© 2024 <span>JakeDenaturat.com</span><br>Wszelkie prawa zastrzeżone · Tylko dla dorosłych</p>
+</div>
+
+<div class="toast" id="toast">✓ Dodano do koszyka!</div>
+
+<div class="bottom-nav">
+  <div class="nav-item active">
+    <div class="nav-icon">🏠</div>
+    <div class="nav-label">Główna</div>
+  </div>
+  <div class="nav-item">
+    <div class="nav-icon">🛒</div>
+    <div class="nav-label">Koszyk</div>
+  </div>
+  <div class="nav-item">
+    <div class="nav-icon">⭐</div>
+    <div class="nav-label">Opinie</div>
+  </div>
+  <div class="nav-item">
+    <div class="nav-icon">📞</div>
+    <div class="nav-label">Kontakt</div>
+  </div>
+</div>
+
+<script>
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = '✓ ' + msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+  function addToCart(name) {
+    showToast('Dodano: ' + name);
+  }
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
